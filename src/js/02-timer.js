@@ -1,20 +1,16 @@
-// Described in documentation
 import flatpickr from 'flatpickr';
-// Additional styles import
 import 'flatpickr/dist/flatpickr.min.css';
-// Notify
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-// DOM
 const datetimePickerEl = document.querySelector('#datetime-picker');
-const startButtonEl = document.querySelector('button[data-start]');
+const startBtnEl = document.querySelector('button[data-start]');
 const daysEl = document.querySelector('span[data-days]');
 const hoursEl = document.querySelector('span[data-hours]');
 const minutesEl = document.querySelector('span[data-minutes]');
 const secondsEl = document.querySelector('span[data-seconds]');
 
 // disable button by default
-startButtonEl.disabled = true;
+startBtnEl.disabled = true;
 
 const options = {
   enableTime: true,
@@ -28,19 +24,19 @@ const options = {
 
     if (selectedDate < dateNow) {
       Notify.failure('Please choose a date in the future');
-      startButtonEl.disabled = true;
+      startBtnEl.disabled = true;
       return;
     }
 
     // if the date is in the future -> enable the button
-    startButtonEl.disabled = false;
+    startBtnEl.disabled = false;
 
     // Begin Countdown
     let timerID = null;
 
     // Countdown Handler
     function handleCountdown() {
-      startButtonEl.disabled = true;
+      startBtnEl.disabled = true;
       datetimePickerEl.disabled = true;
 
       //   run every 1000 ms (1 second)
@@ -64,7 +60,7 @@ const options = {
         secondsEl.textContent = addLeadingZero(seconds);
       }, 1000);
     }
-    startButtonEl.addEventListener('click', handleCountdown);
+    startBtnEl.addEventListener('click', handleCountdown);
   },
 };
 
